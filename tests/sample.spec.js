@@ -15,7 +15,7 @@ test('Form Submission', async ({ page }) => {
   await page.waitForTimeout(2000)
   
   // Fill in all required fields
-  await page.locator("input[id='firstName']").fill('Jacob');
+  await page.locator("input[id='firstName']").fill('James');
   await page.locator("input[id='lastName']").fill('William');
   await page.locator("input[id='employeeId']").fill('ABC-12355');
   await page.locator("input[id='phoneNumber']").fill('9876543210');
@@ -37,19 +37,37 @@ test('Form Submission', async ({ page }) => {
   const url2=await page.url();
   console.log("Title is " +url2 );
 
+  const input= 'James William';
+  const input2 = 'rcb';
+
   // Search Functionality
-  await page.getByPlaceholder("Search by full name (e.g. 'John Doe')...").fill('Jacob William');
+  await page.getByPlaceholder("Search by full name (e.g. 'John Doe')...").fill(input);
   await page.waitForTimeout(2000); 
 
-  // Verify search results
-  const results = await page.locator(".search-results").count(); 
-  console.log("Count "+results);
-  if (results > 0) {
+  // Verify search results  
+  
+  const results1 = await page.locator("(//*[@id='results-content']/div[2]/div/div/table/tbody/tr/td[1])[1]").textContent();
+  console.log(results1);
+  if (results1 == input) {
     console.log("Search results found");
   } else {
     console.log("No results found");
-    await expect(page.locator(".no-results-message")).toHaveText('No results found'); // Update the selector for the "No results found" message
+    await expect(page.locator("(//*[@id='results-content']/div[2]/div/div/table/tbody/tr/td[1])[1]")).toHaveText('No matching documents found'); 
   }
 
-  
+  // Clear the search input
+  await page.getByPlaceholder("Search by full name (e.g. 'John Doe')...").fill('');
+
+  // Second Search Functionality
+  await page.getByPlaceholder("Search by full name (e.g. 'John Doe')...").fill(input2);
+  await page.waitForTimeout(2000); 
+
+  const results2 = await page.locator("(//*[@id='results-content']/div[2]/div/div/table/tbody/tr/td[1])[1]").textContent();
+  console.log(results2);
+  if (results2 == input2) {
+    console.log("Search results found");
+  } else {
+    console.log("No results found");
+    await expect(page.locator("(//*[@id='results-content']/div[2]/div/div/table/tbody/tr/td[1])[1]")).toHaveText('No matching documents found'); 
+  }
 });
