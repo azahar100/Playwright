@@ -1,7 +1,7 @@
 module.exports = {
     homepageUrl: 'http://localhost:5173/',
-    firstName: 'James',
-    lastName: 'William',
+    firstName: 'Sk',
+    lastName: 'Azahar',
     employeeId: 'ABC-12355',
     phoneNumber: '9876543210',
     salary: '9998765',
@@ -9,6 +9,6 @@ module.exports = {
     supervisorEmail: 'supervisor5@the4d.ca',
     costCenter: 'SA-213-XYZ',
     projectCode: 'PRJ-2024-005',
-    positiveSearchInput: 'James William',
-    negativeSearchInput: 'abc'
+    positiveSearchInput: 'Sk Azahar',
+    negativeSearchInput: 'RCB'
   };

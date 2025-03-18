@@ -12,5 +12,7 @@ module.exports = {
     submitButton: "button[type='submit']",
     searchInput: "//input[@placeholder=contains(text(),'')]",
     searchResult: "(//*[@id='results-content']/div[2]/div/div/table/tbody/tr/td[1])[1]",
-    noResultsMessage: "(//*[@id='results-content']/div[2]/div/div/table/tbody/tr/td[1])[1]"
+    noResultsMessage: "(//*[@id='results-content']/div[2]/div/div/table/tbody/tr/td[1])[1]",
+    homeNavButton: "//div/a[@data-testid='nav-home']",
+    resultsNavButton: "//div/a[@data-testid='nav-results']"
   };

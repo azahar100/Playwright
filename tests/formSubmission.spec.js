@@ -34,11 +34,16 @@ test('URL Validation', async ({ page }) => {
 
     // Verify redirection to Results Page
     await assertions.verifyRedirectionToResultsPage(page);
-});
+    // Navigate back to Home Page
+    await page.click(locators.homeNavButton);
+    await page.waitForTimeout(2000);
 
-test('Positive Search Result', async ({ page }) => {
-    // Navigate to the Results Page
-    await page.goto(inputs.homepageUrl + 'results');
+    // Navigate to Results Page from Navbar
+    await page.click(locators.resultsNavButton);
+    await page.waitForTimeout(2000);
+    // Positive Search Result
+    // Ensure the search input is visible
+    await page.waitForSelector(locators.searchInput);
 
     // Search Functionality
     await page.locator(locators.searchInput).fill(inputs.positiveSearchInput);
@@ -46,11 +51,10 @@ test('Positive Search Result', async ({ page }) => {
 
     // Verify search results
     await assertions.verifySearchResults(page, inputs.positiveSearchInput);
-});
 
-test('Negative Search Result', async ({ page }) => {
-    // Navigate to the Results Page
-    await page.goto(inputs.homepageUrl + 'results');
+    // Negative Search Result
+    // Clear the search input
+    await page.locator(locators.searchInput).fill('');
 
     // Second Search Functionality
     await page.locator(locators.searchInput).fill(inputs.negativeSearchInput);
